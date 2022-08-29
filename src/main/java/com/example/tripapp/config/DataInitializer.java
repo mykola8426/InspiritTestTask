@@ -37,7 +37,7 @@ public class DataInitializer {
         bohdan.setEmail("bohdanRomaniv@gmail.com");
         bohdan.setPassword("12345");
         bohdan.setTickets(new ArrayList<>());
-        bohdan.setRoles(Set.of(user, admin));
+        bohdan.setRoles(Set.of(admin));
         bohdan.setBirthDate(LocalDate.of(2000, Month.JULY, 22));
         userService.add(bohdan);
 
