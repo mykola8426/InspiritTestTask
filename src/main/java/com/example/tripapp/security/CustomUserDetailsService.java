@@ -1,6 +1,7 @@
 package com.example.tripapp.security;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import com.example.tripapp.model.User;
 import com.example.tripapp.service.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,14 +19,17 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findByEmail(username).orElseThrow(() ->
-                new NoSuchElementException("Can't find user by email: " + username));
-        org.springframework.security.core.userdetails.User.UserBuilder  builder =
-                org.springframework.security.core.userdetails.User.withUsername(username);
-        builder.password(user.getPassword());
-        builder.roles(user.getRoles().stream()
-                .map(r -> r.getRoleName().name())
-                .toArray(String[]::new));
-        return builder.build();
+        Optional<User> findUser = userService.findByEmail(username);
+        if (findUser.isPresent()) {
+            User user = findUser.get();
+            org.springframework.security.core.userdetails.User.UserBuilder  builder =
+                    org.springframework.security.core.userdetails.User.withUsername(username);
+            builder.password(user.getPassword());
+            builder.roles(user.getRoles().stream()
+                    .map(r -> r.getRoleName().name())
+                    .toArray(String[]::new));
+            return builder.build();
+        }
+        throw new NoSuchElementException("Can't find user by email: " + username);
     }
 }
