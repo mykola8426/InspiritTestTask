@@ -2,6 +2,7 @@ package com.example.tripapp.security;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import javax.transaction.Transactional;
 import com.example.tripapp.model.User;
 import com.example.tripapp.service.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> findUser = userService.findByEmail(username);
         if (findUser.isPresent()) {
