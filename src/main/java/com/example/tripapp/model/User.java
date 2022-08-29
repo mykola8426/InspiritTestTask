@@ -16,7 +16,7 @@ public class User {
     private String name;
     private String lastName;
     private LocalDate birthDate;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "users_tickets",
     joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "tickets_id")
@@ -24,7 +24,7 @@ public class User {
     private List<Ticket> tickets;
     private String email;
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

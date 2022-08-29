@@ -32,7 +32,7 @@ public class LocationController {
     }
 
     @PostMapping
-    public LocationResponseDto create(LocationRequestDto requestDto) {
+    public LocationResponseDto create(@RequestBody LocationRequestDto requestDto) {
         return locationDtoMapper.toDto(locationService.add(locationDtoMapper.toModel(requestDto)));
     }
 
