@@ -54,4 +54,11 @@ To correctly use this service you have to install MySQL, Apache Tomcat version 9
 4. Write login and password to your db into properties with name: "spring.datasource.username" and "spring.datasource.password" in /src/main/resources/application.properties file
 6. Click run button
 7. Go ahead and use it(default users created in DataIntializer.class)!
+8.There are two predefined users: 
+ 1.Login: bohdanRomaniv@gmail.com
+      Password:12345
+      Role:ADMIN
+ 2.Login: mykoolayakymiv@gmail.com
+      Password:12345
+      Role:USER
 
